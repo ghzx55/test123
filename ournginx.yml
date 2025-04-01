@@ -3,7 +3,7 @@ version: '3.8'
 
 services:
   nginx:
-    image: 211.183.3.201:5000/ournginx
+    image: ghzx55/test123
     deploy:
       replicas: 3
       placement:
