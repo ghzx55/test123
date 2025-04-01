@@ -1,0 +1,28 @@
+version: '3.8'
+
+
+services:
+  nginx:
+    image: 211.183.3.201:5000/ournginx
+    deploy:
+      replicas: 3
+      placement:
+        constraints: [ node.role == worker ]
+    volumes:
+      - nginx_vol:/usr/share/nginx/html
+    ports:
+      - "8888:80"
+    networks:
+      - nginx_net
+volumes:
+  nginx_vol:
+    driver: local
+    driver_opts: 
+      type: "nfs4"
+      o: "addr=211.183.3.200,rw"
+      device: ":/nginx"
+
+networks:
+  nginx_net:
+    driver: overlay
+    attachable: true    # docker container로 생성한 컨테이너 연결 가능
